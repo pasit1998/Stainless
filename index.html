@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบบันทึกข้อมูลโรงพยาบาลมหาวิทยาลัยนเรศวร</title>
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f6fa;
+        }
+        header {
+            background-color: #2a507c;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        main {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #2a507c;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .form-group img {
+            width: 300px;
+            display: block;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .form-group .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2a507c;
+        }
+        input[type="text"], input[type="time"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #d1d9e6;
+            border-radius: 5px;
+        }
+        input[type="text"]:focus, input[type="time"]:focus {
+            outline: none;
+            border-color: #4c8ffb;
+            box-shadow: 0 0 5px rgba(76, 143, 251, 0.3);
+        }
+        .radio-group {
+            margin-bottom: 10px;
+        }
+        .radio-group label {
+            font-weight: normal;
+            margin-right: 15px;
+            color: #555;
+        }
+        .button-group {
+            text-align: center;
+        }
+        button {
+            background-color: #4c8ffb;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2a507c;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #eaf4ff;
+            border-left: 5px solid #4c8ffb;
+            font-size: 16px;
+        }
+        .result h3 {
+            margin: 0 0 10px;
+            color: #2a507c;
+        }
+        .result p {
+            margin: 0;
+            color: #555;
+        }
+        @media (max-width: 600px) {
+            main {
+                padding: 20px;
+            }
+            .form-group img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>บันทึกข้อมูลอุปกรณ์โรงพยาบาลมหาวิทยาลัยนเรศวร</h1>
+    </header>
+
+    <main>
+        <h2>กรอกข้อมูลเครื่องมือ</h2>
+        <form id="tempForm">
+            <!-- รูปภาพจอคอมพิวเตอร์ -->
+            <div class="form-group">
+                <img src="Stainless.png" alt="Computer Display">
+                <div class="overlay">เตียงตรวจโรค</div>
+            </div>
+
+            <!-- อุณหภูมิ -->
+            <div class="form-group">
+                <label>เลือกอุณหภูมิ</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="temp" value="4"> 4 องศา</label>
+                    <label><input type="radio" name="temp" value="Roomtemp"> Roomtemp (20-25 องศา)</label>
+                </div>
+            </div>
+
+            <!-- ข้อมูลเพิ่มเติม -->
+            <div class="form-group">
+                <label>Seppd</label>
+                <input type="text" name="seppd" placeholder="กรอกข้อมูลเพิ่มเติม">
+            </div>
+
+            <!-- Blood หรือ Cell -->
+            <div class="form-group">
+                <label>เลือกรายการ</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="item" value="blood"> Blood</label>
+                    <label><input type="radio" name="item" value="cell"> Cell</label>
+                    <label><input type="radio" name="item" value="other"> อื่นๆ</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>รายละเอียด Cell</label>
+                <input type="text" name="cellDetail" placeholder="กรอกรายละเอียด">
+            </div>
+
+            <!-- เวลา -->
+            <div class="form-group">
+                <label>Start Time</label>
+                <input type="time" name="startTime" id="startTime">
+            </div>
+            <div class="form-group">
+                <label>Stop Time</label>
+                <input type="time" name="stopTime" id="stopTime">
+            </div>
+
+            <!-- ปัญหา -->
+            <div class="form-group">
+                <label>แจ้งปัญหาเครื่องมือ</label>
+                <input type="text" name="issue" placeholder="กรอกปัญหา">
+            </div>
+
+            <!-- ปุ่มบันทึก -->
+            <div class="button-group">
+                <button type="button" onclick="calculateTime()">บันทึก</button>
+            </div>
+        </form>
+
+        <!-- แสดงผลลัพธ์ -->
+        <div id="result" class="result" style="display: none;">
+            <h3>ผลลัพธ์:</h3>
+            <p id="output"></p>
+        </div>
+    </main>
+
+    <script>
+        function calculateTime() {
+            const startTime = document.getElementById('startTime').value;
+            const stopTime = document.getElementById('stopTime').value;
+
+            if (!startTime || !stopTime) {
+                alert('กรุณากรอก Start Time และ Stop Time');
+                return;
+            }
+
+            const start = new Date(`1970-01-01T${startTime}:00`);
+            const stop = new Date(`1970-01-01T${stopTime}:00`);
+            const diff = (stop - start) / (1000 * 60); // คำนวณเป็นนาที
+
+            if (diff < 0) {
+                alert('Stop Time ต้องมากกว่า Start Time');
+                return;
+            }
+
+            const hours = Math.floor(diff / 60);
+            const minutes = diff % 60;
+
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('output').textContent = `เวลารวมทั้งหมด: ${hours} ชั่วโมง ${minutes} นาที`;
+        }
+    </script>
+</body>
+</html>
